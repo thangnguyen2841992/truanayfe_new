@@ -22,12 +22,14 @@ import {OrderViewComponent} from './order-view/order-view.component';
 import { RevenueComponent } from './revenue/revenue.component';
 import { BannedComponent } from './banned/banned.component';
 import { CreateCouponComponent } from './create-coupon/create-coupon.component';
+import { CouponListComponent } from './coupon-list/coupon-list.component';
+import { CouponDeleteComponent } from './coupon-delete/coupon-delete.component';
 
 @NgModule({
   declarations: [FoodListComponent, MyMerchantBannerComponent,
     SecondNavbarComponent, DishesComponent, InfoComponent,
     ListOrderByDishComponent, DishCreateComponent, DishEditComponent, DishCeaseComponent, OrderListComponent,
-    CountOrdersByDishComponent, CountOrdersByUserComponent, ListOrderByCustomerComponent,OrderViewComponent, RevenueComponent, BannedComponent, CreateCouponComponent
+    CountOrdersByDishComponent, CountOrdersByUserComponent, ListOrderByCustomerComponent,OrderViewComponent, RevenueComponent, BannedComponent, CreateCouponComponent, CouponListComponent, CouponDeleteComponent
   ],
     imports: [
         SharedModule,

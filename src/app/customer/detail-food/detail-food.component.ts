@@ -16,7 +16,7 @@ import {CouponService} from '../../service/coupon/coupon.service';
 })
 export class DetailFoodComponent implements OnInit {
 
-  id: number;
+  dishId: number;
   merchant: Merchant = {};
   dish: Dish = {categories: [], merchant: {}};
   dishesForYou: Dish[] = [];
@@ -34,7 +34,7 @@ export class DetailFoodComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
   ) {
     this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
-      this.id = +paramMap.get('id');
+      this.dishId = +paramMap.get('id');
       this.getMerchant();
     });
     this.currentUserId = this.authService.getCurrentUserId();
@@ -42,7 +42,6 @@ export class DetailFoodComponent implements OnInit {
 
   ngOnInit() {
     document.getElementById('dish-image').scrollIntoView(true);
-
     this.quantity = 1;
     this.getDish();
     this.getMerchant();
@@ -50,23 +49,23 @@ export class DetailFoodComponent implements OnInit {
   }
 
     getCouponByDishId() {
-      this.couponService.getCouponByDishId(this.id).subscribe(
+      this.couponService.getCouponByDish(this.dishId).subscribe(
         response => this.coupons = response as Coupon[]
       );
     }
 
     getDish() {
-      this.dishService.getById(this.id).subscribe(
+      this.dishService.getById(this.dishId).subscribe(
         (response) => {
           this.dish = response as Dish;
           this.calculateDishTotal();
-          window.scroll(0,0);
+          window.scroll(0, 0);
         }
       );
     }
 
     getMerchant() {
-      this.dishService.getById(this.id).subscribe(
+      this.dishService.getById(this.dishId).subscribe(
         (response) => {
           this.dish = response as Dish;
           this.merchant = this.dish.merchant;

@@ -4,7 +4,7 @@ import {AuthService} from '../../service/auth/auth.service';
 import {CartService} from '../../service/cart/cart.service';
 import {NotificationService} from '../../service/notification/notification.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {CouponService} from "../../service/coupon/coupon.service";
 import {Coupon} from "../../model/coupon";
 
@@ -28,9 +28,11 @@ export class CartTableCheckoutComponent implements OnInit {
   showRestaurantNote: boolean;
 
   @Output()
-  changeCart = new EventEmitter();
+  changeCart = new EventEmitter<Cart>();
 
   @Output() noteRestaurant1 = new EventEmitter<string>();
+
+  @Output() coupon = new EventEmitter<number>();
 
   noteRestaurantForm = new FormGroup({
     noteRestaurant: new FormControl('')
@@ -39,15 +41,13 @@ export class CartTableCheckoutComponent implements OnInit {
 
   coupons: Coupon[];
 
+
   constructor(private authService: AuthService,
               private cartService: CartService,
               private notificationService: NotificationService,
               private router: Router,
               private couponService: CouponService
   ) {
-  }
-  getNoteRestaurant() {
-    this.noteRestaurant1.emit(this.noteRestaurantForm.value.noteRestaurant);
   }
   ngOnInit() {
     this.getCart();
@@ -84,4 +84,13 @@ export class CartTableCheckoutComponent implements OnInit {
       this.coupons = coupons;
     });
   }
+
+  selectCoupon($event) {
+    this.coupon.emit($event.target.value);
+    this.cartService.getUpdateUserCartByMerchant(this.merchantId, $event.target.value).subscribe((cart) => {
+      this.cart = cart;
+      this.changeCart.emit(cart);
+    });
+  }
+
 }

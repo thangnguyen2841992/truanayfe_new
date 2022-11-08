@@ -4,6 +4,7 @@ import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {CategoryService} from 'src/app/service/category/category.service';
 import {Router} from '@angular/router';
 import {DishService} from '../../service/dish/dish.service';
+import {AuthService} from "../../service/auth/auth.service";
 
 @Component({
   selector: 'app-dish-create',
@@ -18,10 +19,12 @@ export class DishCreateComponent implements OnInit {
     description: new FormControl(),
     image: new FormControl('', Validators.required)
   });
-
+  currentUserId: number;
   constructor(private dishService: DishService,
               private categoryService: CategoryService,
-              private router: Router) {
+              private router: Router,
+              private authService: AuthService) {
+    this.currentUserId = this.authService.currentUserValue.id;
   }
 
   get name() {
@@ -48,7 +51,7 @@ export class DishCreateComponent implements OnInit {
 
   createDish() {
     if (this.dishForm.valid) {
-      this.dishService.createMerchantDish(this.dishForm.value).subscribe(() => {
+      this.dishService.createMerchantDish(this.currentUserId, this.dishForm.value).subscribe(() => {
         /// thong bao
       }, error => {
         // thong bao

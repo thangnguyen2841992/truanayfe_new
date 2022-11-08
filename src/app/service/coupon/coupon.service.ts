@@ -30,4 +30,13 @@ export class CouponService {
   getCouponByMerchant(merchantId: number): Observable<Coupon[]> {
     return this.httpClient.get<Coupon[]>(`${API_URL}/coupons/merchant/${merchantId}`);
   }
+  getCouponByDish(dishId: number): Observable<Coupon[]> {
+    return this.httpClient.get<Coupon[]>(`${API_URL}/coupons/dish/${dishId}`);
+  }
+  getCouponByUser(userId: number): Observable<Coupon[]> {
+    return this.httpClient.get<Coupon[]>(`${API_URL}/coupons/user/${userId}`);
+  }
+  deleteCoupon(couponId: number): Observable<Coupon> {
+    return this.httpClient.delete<Coupon>(`${API_URL}/coupons/delete/coupon/${couponId}`);
+  }
 }

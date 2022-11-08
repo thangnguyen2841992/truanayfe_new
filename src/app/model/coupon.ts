@@ -7,4 +7,5 @@ export interface Coupon {
   value?: number;
   merchant?: Merchant;
   description?: string;
+  reduction?: number;
 }

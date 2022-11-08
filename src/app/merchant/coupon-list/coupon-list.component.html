@@ -8,8 +8,7 @@
       <div class="col-12">
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title">Danh sách món ăn</h3>
-            <a  routerLink="/merchant/coupon/list"><h3 id="link-voucher" class="card-title">Danh sách voucher</h3></a>
+            <h3 class="card-title">Danh sách voucher</h3>
             <button class="btn btn-info float-right" id="create-coupon">
               <a class="text-light" routerLink="/merchant/create-coupon">Tạo voucher</a>
             </button>
@@ -23,38 +22,26 @@
               <thead>
               <tr>
                 <th>#</th>
-                <th>Tên món ăn</th>
-                <th>Giá</th>
-                <th>Loại món</th>
-                <th>Đã bán</th>
+                <th>Tên voucher</th>
+                <th>Mức giảm giá</th>
+                <th>Đơn giá tối thiểu</th>
                 <th>Mô tả</th>
-                <th>Ảnh món ăn</th>
+<!--                <th>Mô tả</th>-->
+<!--                <th>Ảnh món ăn</th>-->
                 <th colspan="2">Hành động</th>
               </tr>
               </thead>
               <tbody>
-              <tr *ngFor="let dish of dishes; index as i">
+              <tr *ngFor="let coupon of coupons; index as i">
                 <td>{{i + 1}}</td>
-                <td>{{dish.name}}</td>
-                <td>{{dish.price}}</td>
-                <td>
-                          <span *ngFor="let category of dish.categories; index as i">
-                            {{category.name}}<span *ngIf="i < dish.categories.length - 1">, </span>
-                          </span>
-                </td>
-                <td>{{dish.sold}}</td>
-                <td>{{dish.description}}</td>
-                <td><img src="http://localhost:8080/image/{{dish.image}}" style="height:120px" alt="Ảnh món ăn"></td>
-                <td class="text-center" style="border-right: none">
-                  <a class="btn btn-warning" routerLink="/merchant/dish/edit/{{dish.id}}">
-                    <i class="fa fa-edit"></i>
-                  </a>
-                </td>
+                <td>{{coupon.name}}</td>
+                <td>{{coupon.reduction}}</td>
+                <td>{{coupon.value}}</td>
+                <td>{{coupon.description}}</td>
                 <td class="text-center" style="border-left: none">
-                  <a class="btn btn-danger" routerLink="['/merchant/dish/delete', dish.id]">
+                  <button (click)="getCouponId(coupon.id)" class="btn btn-danger"   data-toggle="modal" data-target="#delete-voucher-modal">
                     <i class="fa fa-trash"></i>
-                  </a>
-                </td>
+                  </button>                </td>
               </tr>
               </tbody>
             </table>
@@ -72,3 +59,18 @@
 
 <hr>
 <app-footer></app-footer>
+
+<div class="modal fade" id="delete-voucher-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Bạn chắc chắn muốn xóa voucher này chứ?</h5>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        <button type="submit" class="btn btn-danger" data-dismiss="modal" (click)="deleteCoupon()">Xóa</button>
+      </div>
+    </div>
+  </div>
+</div>

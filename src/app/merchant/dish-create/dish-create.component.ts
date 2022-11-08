@@ -79,7 +79,7 @@ export class DishCreateComponent implements OnInit {
           newDish.append('image', imageFile[0]);
           console.log(newDish.get('image'));
         }
-        this.dishService.createMerchantDish(newDish).subscribe(() => {
+        this.dishService.createMerchantDish(this.currentUserId, newDish).subscribe(() => {
           this.notificationService.showMessage('success', 'Tạo món ăn thành công');
           this.router.navigateByUrl('/merchant');
         }, error => {

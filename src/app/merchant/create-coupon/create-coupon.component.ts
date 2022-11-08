@@ -24,6 +24,7 @@ export class CreateCouponComponent implements OnInit {
     name: new FormControl('', Validators.required),
     quantity: new FormControl('', Validators.required),
     description: new FormControl('', Validators.required),
+    reduction: new FormControl('', Validators.required)
   });
   merchant: Merchant = {};
   currentUserId: number;
@@ -53,6 +54,10 @@ export class CreateCouponComponent implements OnInit {
   get descriptionControl() {
     return this.couponForm.get('description');
   }
+
+  get reductionControl() {
+    return this.couponForm.get('reduction');
+  }
   getMerchant() {
     this.merchantService.getMerchantByUser(this.currentUserId).subscribe(merchantBE => {
       this.merchant = merchantBE;
@@ -65,11 +70,12 @@ export class CreateCouponComponent implements OnInit {
        name : this.couponForm.value.name,
        merchant: this.merchant,
        description: this.couponForm.value.description,
-       value: this.couponForm.value.quantity
-     }
+       value: this.couponForm.value.quantity,
+       reduction: this.couponForm.value.reduction
+     };
       this.couponService.createCoupon(newCoupon).subscribe(() => {
         this.notificationService.showMessage('success', 'Tạo voucher thành công');
-        this.router.navigateByUrl('/merchant');
+        this.router.navigateByUrl('/merchant/coupon/list');
       }, error => {
         this.notificationService.showMessage('error', error.error.message);
       });

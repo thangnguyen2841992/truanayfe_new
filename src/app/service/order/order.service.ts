@@ -3,6 +3,8 @@ import {environment} from '../../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {OrderDto} from '../../model/order-dto';
 import {Observable} from 'rxjs';
+import {Order} from "../../model/order";
+import {OrderResponse} from "../../model/order-response";
 
 const API_URL = `${environment.apiUrl}`;
 
@@ -19,8 +21,8 @@ export class OrderService {
     return this.httpClient.post(`${API_URL}/current-user/create-order/user/${userId}`, orderDto);
   }
 
-  getOrder(orderId: number): Observable<OrderDto> {
-    return this.httpClient.get(`${API_URL}/orders/${orderId}`);
+  getOrder(orderId: number): Observable<OrderResponse> {
+    return this.httpClient.get<OrderResponse>(`${API_URL}/orders/${orderId}`);
   }
 
   cancelOrder(orderId: number, orderDto: OrderDto) {

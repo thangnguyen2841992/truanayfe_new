@@ -18,10 +18,17 @@
           </div>
 
           <div class="mb-3">
-            <label for="price" class="form-label">Số lượng voucher</label>
+            <label for="price" class="form-label">Giá trị đơn hàng tối thiểu</label>
             <input type="text" class="form-control" id="price" formControlName="quantity">
             <div class="validate" [hidden]="priceControl.valid || !priceControl.touched">
-              <div *ngIf="priceControl.errors?.required">Số lượng voucher</div>
+              <div *ngIf="priceControl.errors?.required">Giá trị đơn hàng tối thiểu</div>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="reduction" class="form-label">Số tiền giảm giá</label>
+            <input type="text" class="form-control" id="reduction" formControlName="reduction">
+            <div class="validate" [hidden]="reductionControl.valid || !priceControl.touched">
+              <div *ngIf="reductionControl.errors?.required">Số tiền giảm giá</div>
             </div>
           </div>
 

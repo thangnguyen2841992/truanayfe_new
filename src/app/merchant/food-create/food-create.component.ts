@@ -5,6 +5,7 @@ import {Category} from '../../model/category';
 import {DishService} from '../../service/dish/dish.service';
 import {Router} from '@angular/router';
 import {NotificationService} from '../../service/notification/notification.service';
+import {AuthService} from "../../service/auth/auth.service";
 
 @Component({
   selector: 'app-food-create',
@@ -17,12 +18,15 @@ export class FoodCreateComponent implements OnInit {
     price: new FormControl('', Validators.required),
     description: new FormControl('', Validators.required),
   });
+  currentUserId: number;
   selectedImages: any;
   categoryList: Category[] = [];
 
   constructor(private dishService: DishService,
               private router: Router,
-              private notificationService: NotificationService) {
+              private notificationService: NotificationService,
+              private authService: AuthService) {
+    this.currentUserId = this.authService.currentUserValue.id;
   }
 
   get nameControl() {
@@ -42,7 +46,7 @@ export class FoodCreateComponent implements OnInit {
 
   createDish() {
     if (this.dishForm.valid) {
-      this.dishService.createMerchantDish(this.dishForm.value).subscribe(() => {
+      this.dishService.createMerchantDish( this.currentUserId, this.dishForm.value).subscribe(() => {
         this.notificationService.showMessage('success', 'Tạo món ăn thành công');
       }, error => {
         this.notificationService.showMessage('error', error.error.message);

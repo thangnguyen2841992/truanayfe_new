@@ -12,7 +12,8 @@ import {ListOrderByCustomerComponent} from './list-order-by-customer/list-order-
 import {OrderViewComponent} from './order-view/order-view.component';
 import {RevenueComponent} from './revenue/revenue.component';
 import {BannedComponent} from './banned/banned.component';
-import {CreateCouponComponent} from "./create-coupon/create-coupon.component";
+import {CreateCouponComponent} from './create-coupon/create-coupon.component';
+import {CouponListComponent} from './coupon-list/coupon-list.component';
 
 const routes: Routes = [
 
@@ -71,6 +72,10 @@ const routes: Routes = [
   {
     path: 'create-coupon',
     component: CreateCouponComponent
+  },
+  {
+    path: 'coupon/list',
+    component: CouponListComponent
   }
 ];
 

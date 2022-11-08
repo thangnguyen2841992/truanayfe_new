@@ -1,0 +1,17 @@
+<a class="btn btn-danger"  data-toggle="modal" data-target="#delete-voucher-modal">
+  <i class="fa fa-trash"></i>
+</a>
+<div class="modal fade" id="delete-voucher-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Bạn chắc chắn muốn xóa voucher này chứ?</h5>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+        <button type="submit" class="btn btn-danger" data-dismiss="modal" (click)="deleteCoupon()">Xóa</button>
+      </div>
+    </div>
+  </div>
+</div>

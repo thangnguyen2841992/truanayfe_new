@@ -10,6 +10,7 @@ import {ActivatedRoute, ParamMap, Router} from '@angular/router';
 import {NotificationService} from '../../service/notification/notification.service';
 import {User} from '../../model/user';
 import {Form, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Coupon} from "../../model/coupon";
 
 declare var $: any;
 
@@ -43,7 +44,7 @@ export class CheckoutComponent implements OnInit {
   });
   currentUserId: number;
   noteRestaurant: string;
-
+  couponId: number;
   constructor(private authService: AuthService,
               private cartService: CartService,
               private deliveryInfoService: DeliveryInfoService,
@@ -150,6 +151,7 @@ export class CheckoutComponent implements OnInit {
     const orderDto = {
       cart: this.cart,
       deliveryInfo: this.defaultDeliveryInfo,
+      couponId: this.couponId,
       noteShipper: this.noteShipperForm.value.noteShipper,
       noteRestaurant: this.noteRestaurant
     };
@@ -169,4 +171,8 @@ export class CheckoutComponent implements OnInit {
     this.deliveryInfoForm.get('phone').setValue('');
   }
 
+  getCoupon($event) {
+    this.couponId = $event;
+    console.log(this.couponId);
+  }
 }

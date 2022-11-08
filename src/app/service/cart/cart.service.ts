@@ -35,8 +35,13 @@ export class CartService {
     return this.httpClient.get(`${API_URL}/carts/${cartId}/decrease-dish-quantity/${dishId}`);
   }
 
-  getCurrentUserCartByMerchant(merchantId: number){
+  getCurrentUserCartByMerchant(merchantId: number) {
     const currentUserId = this.authService.getCurrentUserId();
     return this.httpClient.get(`${API_URL}/carts/users/${currentUserId}/merchants/${merchantId}`);
+  }
+  getUpdateUserCartByMerchant(merchantId: number, couponId: number) {
+    const currentUserId = this.authService.getCurrentUserId();
+    return this.httpClient.get(`${API_URL}/carts/users/${currentUserId}/merchants/${merchantId}/coupon/${couponId}`);
+
   }
 }
